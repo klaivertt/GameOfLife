@@ -6,6 +6,12 @@ Button::Button(sf::Shape* _shape)
     m_isActive = false;
     m_isOver = false;
 }
+
+Button::~Button()
+{
+    delete this->m_shape;
+}
+
 void Button::Update()
 {
     sf::Color fillC = m_isActive ? COLOR_G : COLOR_R;

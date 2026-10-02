@@ -68,6 +68,14 @@ int main()
 		window.display();
 	}
 
+	for (size_t i = 0; i < data->widget.size(); i++)
+	{
+		Widget* widget = data->widget[i];
+		delete widget;
+	}
+
+	data->widget.clear();
+
 	delete data;
 
 	return 0;

@@ -8,6 +8,12 @@ CheckBox::CheckBox(sf::Shape* _shape)
     m_shape->setOutlineColor(sf::Color(100, 100, 100));
     m_shape->setOutlineThickness(5.f);
 }
+
+CheckBox::~CheckBox()
+{
+    delete this->m_shape;
+}
+
 void CheckBox::Update()
 {
     sf::Color fillC = m_isActive ? COLOR_G : COLOR_R;

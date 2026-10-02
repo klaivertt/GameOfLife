@@ -6,6 +6,7 @@ class Button : public Widget
 {
 public:
 	Button(sf::Shape* _shape);
+	~Button();
 	void Update() override;
 	void Draw(sf::RenderTarget& _render) override;
 
