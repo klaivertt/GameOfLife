@@ -5,6 +5,7 @@ class CheckBox : public Widget
 {
 public:
 	CheckBox(sf::Shape* _shape);
+	~CheckBox();
 	void Update() override;
 	void Draw(sf::RenderTarget& _render) override;
 
