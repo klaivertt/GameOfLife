@@ -15,7 +15,7 @@ public:
 	bool IsActive() override;
 	bool IsOver() override;
 protected :
-	sf::Shape* shape;
+	sf::Shape* m_shape;
 
 	virtual void CheckCollision(const sf::Vector2i& _pos) override;
 };

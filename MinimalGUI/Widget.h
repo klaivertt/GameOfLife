@@ -19,8 +19,8 @@ public:
 	virtual bool IsActive() = 0;
 	virtual bool IsOver() = 0;
 protected:
-	bool isActive;
-	bool isOver;
+	bool m_isActive;
+	bool m_isOver;
 
 	virtual void CheckCollision(const sf::Vector2i& _pos) = 0;
 };

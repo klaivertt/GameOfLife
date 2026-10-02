@@ -9,24 +9,31 @@ int Load(GameData& _data)
     {
         return -1;
     }
-    sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
-    shape->setPosition(sf::Vector2f(40.f, 40.f));
-    _data.widget.push_back(new Button(shape));
 
-    shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
-    shape->setPosition(sf::Vector2f(40.f, 90.f));
-    _data.widget.push_back(new CheckBox(shape));
-
-    sf::CircleShape* circle = new sf::CircleShape(20.f);
-    circle->setPosition(sf::Vector2f(120.f, 40.f));
-    _data.widget.push_back(new Button(circle));
-
-    circle = new sf::CircleShape(20.f);
-    circle->setPosition(sf::Vector2f(1200.f, 40.f));
-    _data.widget.push_back(new CheckBox(circle));
-
-    circle = new sf::CircleShape(20.f);
-    circle->setPosition(sf::Vector2f(180.f, 40.f));
-    _data.widget.push_back(new Button(circle));
+    for (size_t i = 0; i < 2; i++)
+    {
+        sf::CircleShape* shape = new sf::CircleShape(20.f);
+        shape->setPosition(sf::Vector2f(40.f, 40.f + 60.f * _data.widget.size()));
+        _data.widget.push_back(new Button(shape));
+    }
+    for (size_t i = 0; i < 2; i++)
+    {
+        sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
+        shape->setPosition(sf::Vector2f(40.f, 40.f + 60.f * _data.widget.size()));
+        _data.widget.push_back(new Button(shape));
+    }
+    for (size_t i = 0; i < 3; i++)
+    {
+        sf::CircleShape* shape = new sf::CircleShape(20.f);
+        shape->setPosition(sf::Vector2f(40.f, 40.f + 60.f * _data.widget.size()));
+        _data.widget.push_back(new CheckBox(shape));
+    }
+    for (size_t i = 0; i < 2; i++)
+    {
+        sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
+        shape->setPosition(sf::Vector2f(40.f, 40.f + 60.f * _data.widget.size()));
+        _data.widget.push_back(new CheckBox(shape));
+    }
+    
     return 0;
 }

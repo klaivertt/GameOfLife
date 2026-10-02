@@ -2,20 +2,20 @@
 
 Button::Button(sf::Shape* _shape)
 {
-    this->shape = _shape;
-    isActive = false;
-    isOver = false;
+    this->m_shape = _shape;
+    m_isActive = false;
+    m_isOver = false;
 }
 void Button::Update()
 {
-    sf::Color fillC = isActive ? COLOR_G : COLOR_R;
+    sf::Color fillC = m_isActive ? COLOR_G : COLOR_R;
 
-    this->shape->setFillColor(isOver ? fillC + sf::Color(20,20,20) : fillC);
+    this->m_shape->setFillColor(m_isOver ? fillC + sf::Color(20,20,20) : fillC);
 }
 
 void Button::Draw(sf::RenderTarget& _render)
 {
-    _render.draw(*shape);
+    _render.draw(*m_shape);
 }
 
 void Button::MoosePos(const sf::Vector2i& const _pos)
@@ -26,34 +26,34 @@ void Button::MoosePos(const sf::Vector2i& const _pos)
 
 void Button::Pressed()
 {
-    if (isOver)
+    if (m_isOver)
     {
-        isActive = true;
+        m_isActive = true;
     }
 }
 void Button::Released()
 {
-    if (isOver)
+    if (m_isOver)
     {
-        isActive = false;
+        m_isActive = false;
     }
 }
 
 bool Button::IsActive()
 {
-    return isActive;
+    return m_isActive;
 }
 
 bool Button::IsOver()
 {
-    return isOver;
+    return m_isOver;
 }
 
 void Button::CheckCollision(const sf::Vector2i& const _pos)
 {
-    sf::FloatRect floatR = this->shape->getGlobalBounds();
+    sf::FloatRect floatR = this->m_shape->getGlobalBounds();
     sf::Vector2f vec = sf::Vector2f(_pos);
-    isOver = CollisionRectPoint(floatR, vec);
+    m_isOver = CollisionRectPoint(floatR, vec);
     //std::cout << "x : " << vec.x << "y : " << vec.y << std::endl;
     //std::cout << (isOver ? "collision" : "No collision") << std::endl;
 }
