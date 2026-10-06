@@ -55,19 +55,27 @@ void GameLife::Update(float _dt)
 		{
 			for (int j = 0; j < gridSize.x; j++)
 			{
+				// copy le statue de basse de la cellule en vie ou morte
 				bool isCellAlive = copyCellAlive[i][j];
+
+				// intialise le conteur de cellule vivante autour
 				int countCellAlive = 0;
 
 				for (int y = -1; y <= 1; y++)
 				{
 					for (int x = -1; x <= 1; x++)
 					{
+						// prend une des 8 case autour de la cellule -1x -1y à +1x +1y
 						int finalX = j + x;
 						int finalY = i + y;
 
+						// ignore la celulle de base
 						bool isNotSelf = (x != 0 || y != 0);
+
+						// verrifie si la cellule selectionner et dans le std::vector<>
 						bool isInGrid = finalX >= 0 && finalX < gridSize.x && finalY >= 0 && finalY < gridSize.y;
 
+						// ajoute si la cellue est vivante et quez les bool précedente sont valide
 						if (isNotSelf && isInGrid && copyCellAlive[finalY][finalX])
 						{
 							countCellAlive++;
@@ -75,6 +83,7 @@ void GameLife::Update(float _dt)
 					}
 				}
 
+				//choisit l'état final de la cellule
 				if (isCellAlive)
 				{
 					cellAlive[i][j] = (countCellAlive == 2 || countCellAlive == 3);
