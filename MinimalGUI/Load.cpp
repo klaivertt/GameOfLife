@@ -38,7 +38,7 @@ int Load(GameData& _data)
 	}
 
 	int sizeGrid = 60;
-	_data.gameLife = GameLife(sf::Vector2i(sizeGrid, sizeGrid));
+	_data.gameLife = GameLife(sf::Vector2i(sizeGrid, sizeGrid), 0.5f);
 
 	return 0;
 }
