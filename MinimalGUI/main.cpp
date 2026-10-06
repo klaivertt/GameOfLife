@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------------
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "MinimalGUI");
+	sf::RenderWindow window(sf::VideoMode(SCREEN_S.x, SCREEN_S.y), "MinimalGUI");
 
 	GameData* data = new GameData();
 

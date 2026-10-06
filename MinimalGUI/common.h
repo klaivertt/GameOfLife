@@ -9,6 +9,8 @@
 #include <ctime>
 #include <iostream>
 
+#define SCREEN_S sf::Vector2i(1920, 1080)
+
 constexpr const float M_PI = 3.141592654f;
 
 using Pixel = unsigned int;
