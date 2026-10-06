@@ -4,6 +4,8 @@
 #include "CheckBox.h"
 int Load(GameData& _data)
 {
+	srand((unsigned int)(time(NULL)));
+
 	sf::Font& font = _data.font;
 	if (!font.loadFromFile("arial.ttf"))
 	{
@@ -28,14 +30,15 @@ int Load(GameData& _data)
 		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
 		_data.widget.push_back(new CheckBox(shape));
 	}
-	for (size_t i = 0; i < 2; i++)
+	for (size_t i = 0; i < 9; i++)
 	{
 		sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
 		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
 		_data.widget.push_back(new CheckBox(shape));
 	}
 
-	_data.gameLife = GameLife(sf::Vector2i(50, 50));
+	int sizeGrid = 60;
+	_data.gameLife = GameLife(sf::Vector2i(sizeGrid, sizeGrid));
 
 	return 0;
 }

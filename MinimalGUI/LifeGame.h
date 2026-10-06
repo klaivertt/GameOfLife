@@ -6,7 +6,7 @@
 class GameLife
 {
 public:
-	GameLife(sf::Vector2i _gridSize);
+	GameLife(sf::Vector2i _gridSize, float _updateTime = 1/20);
 	~GameLife();
 
 	void Update(float _dt);
@@ -17,4 +17,7 @@ private:
 	std::vector<std::vector<sf::RectangleShape>> grid;
 	sf::RectangleShape gridRect;
 	sf::Vector2f cellSize;
+	float updateTime;
+	float time;
+	std::vector<std::vector<bool>> cellAlive;
 };

@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
 
 #define SCREEN_S sf::Vector2i(1920, 1080)
 
@@ -18,5 +20,5 @@ using Pixel = unsigned int;
 class GameData;
 
 bool CollisionRectPoint(sf::FloatRect& _rect, sf::Vector2f& _vec);
-
+int Random(int _min, int _max);
 #endif
