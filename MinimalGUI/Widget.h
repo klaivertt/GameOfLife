@@ -15,9 +15,7 @@ public:
 	virtual void MoosePos(const sf::Vector2i& _pos) = 0;
 	virtual void Pressed() = 0;
 	virtual void Released() = 0;
-
-	virtual bool IsActive() = 0;
-	virtual bool IsOver() = 0;
+	
 protected:
 	bool m_isActive;
 	bool m_isOver;

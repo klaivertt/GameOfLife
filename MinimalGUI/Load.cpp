@@ -11,34 +11,32 @@ int Load(GameData& _data)
 	{
 		return -1;
 	}
-	float x = SCREEN_S.x - 80.f;
-	for (size_t i = 0; i < 2; i++)
-	{
-		sf::CircleShape* shape = new sf::CircleShape(20.f);
-		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
-		_data.widget.push_back(new Button(shape));
-	}
-	for (size_t i = 0; i < 2; i++)
-	{
-		sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
-		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
-		_data.widget.push_back(new Button(shape));
-	}
-	for (size_t i = 0; i < 3; i++)
-	{
-		sf::CircleShape* shape = new sf::CircleShape(20.f);
-		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
-		_data.widget.push_back(new CheckBox(shape));
-	}
-	for (size_t i = 0; i < 9; i++)
-	{
-		sf::RectangleShape* shape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
-		shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
-		_data.widget.push_back(new CheckBox(shape));
-	}
 
 	int sizeGrid = 60;
 	_data.gameLife = GameLife(sf::Vector2i(sizeGrid, sizeGrid), 0.5f);
+
+	GameLife& game = _data.gameLife;
+
+	float x = SCREEN_S.x - 80.f;
+
+	sf::CircleShape* shape = new sf::CircleShape(20.f);
+	shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
+
+	Button* buttonInit = new Button(shape);
+
+	buttonInit->SetOnClick([&game]() { game.Init(); });
+
+	_data.widget.push_back(buttonInit);
+
+
+	sf::RectangleShape* rshape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
+	rshape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
+	CheckBox* checkBox = new CheckBox(rshape);
+
+	checkBox->SetOnToggle([&game](bool _on) { game.SetPause(_on); });
+
+	_data.widget.push_back(checkBox);
+
 
 	return 0;
 }

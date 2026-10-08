@@ -5,7 +5,16 @@ GameLife::GameLife(sf::Vector2i _gridSize, float _updateTime)
 	gridSize = _gridSize;
 	time = 0;
 	updateTime = _updateTime;
+	Init();
+}
 
+GameLife::~GameLife()
+{
+}
+
+void GameLife::Init()
+{
+	pause = false;
 	float sSize = (SCREEN_S.y - MARGIN.y * 5);
 	cellSize = sf::Vector2f(sSize / gridSize.x, sSize / gridSize.y);
 
@@ -38,12 +47,19 @@ GameLife::GameLife(sf::Vector2i _gridSize, float _updateTime)
 	}
 }
 
-GameLife::~GameLife()
+void GameLife::SetPause(bool _b)
 {
+	pause = _b;
 }
 
 void GameLife::Update(float _dt)
 {
+	std::cout << "pause : " << pause << std::endl;
+	if (pause)
+	{
+		return;
+	}
+	
 	time += _dt;
 	if (updateTime < time)
 	{

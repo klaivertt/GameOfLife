@@ -9,6 +9,10 @@ public:
 	GameLife(sf::Vector2i _gridSize, float _updateTime = 1/20);
 	~GameLife();
 
+	void Init();
+	void SetPause(bool _b);
+
+
 	void Update(float _dt);
 	void Draw(sf::RenderTarget& _render);
 private:
@@ -19,5 +23,6 @@ private:
 	sf::Vector2f cellSize;
 	float updateTime;
 	float time;
+	bool pause;
 	std::vector<std::vector<bool>> cellAlive;
 };

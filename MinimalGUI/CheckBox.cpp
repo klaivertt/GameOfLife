@@ -5,6 +5,7 @@ CheckBox::CheckBox(sf::Shape* _shape)
     this->m_shape = _shape;
     m_isActive = false;
     m_isOver = false;
+    m_isPressed = false;
     m_shape->setOutlineColor(sf::Color(100, 100, 100));
     m_shape->setOutlineThickness(5.f);
 }
@@ -34,26 +35,31 @@ void CheckBox::MoosePos(const sf::Vector2i& const _pos)
     CheckCollision(_pos);
 }
 
-void CheckBox::Released()
+
+void CheckBox::SetOnToggle(Callback _cb)
 {
+    m_onToggle = std::move(_cb);
 }
 
 void CheckBox::Pressed()
 {
     if (m_isOver)
     {
-        m_isActive = !m_isActive;
+      m_isPressed = true;
     }
 }
 
-bool CheckBox::IsActive()
+void CheckBox::Released()
 {
-    return m_isActive;
-}
-
-bool CheckBox::IsOver()
-{
-    return m_isOver;
+    if (m_isPressed && m_isOver)
+    {
+        m_isActive = !m_isActive;
+        if (m_onToggle)
+        {
+            m_onToggle(m_isActive);
+        }
+    }
+    m_isPressed = false;
 }
 
 void CheckBox::CheckCollision(const sf::Vector2i& const _pos)

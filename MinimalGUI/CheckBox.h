@@ -1,8 +1,12 @@
 #pragma once
 #include "Widget.h"
 
+
+
 class CheckBox : public Widget
 {
+private:
+	using Callback = std::function<void(bool)>;
 public:
 	CheckBox(sf::Shape* _shape);
 	~CheckBox();
@@ -13,10 +17,12 @@ public:
 	void Pressed() override;
 	void Released() override;
 
-	bool IsActive() override;
-	bool IsOver() override;
+	void SetOnToggle(Callback _cb);
+
 protected :
 	sf::Shape* m_shape;
+	Callback m_onToggle;
+	bool m_isPressed;
 
 	virtual void CheckCollision(const sf::Vector2i& _pos) override;
 };

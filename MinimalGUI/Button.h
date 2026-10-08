@@ -2,8 +2,11 @@
 
 #include "Widget.h"
 
+
 class Button : public Widget
 {
+private:
+	using Callback = std::function<void()>;
 public:
 	Button(sf::Shape* _shape);
 	~Button();
@@ -14,9 +17,9 @@ public:
 	void Pressed() override;
 	void Released() override;
 
-	bool IsActive() override;
-	bool IsOver() override;
+	void SetOnClick(Callback _cb);
 protected:
 	sf::Shape* m_shape;
+	Callback m_onClick;
 	void CheckCollision(const sf::Vector2i& _pos) override;
 };
