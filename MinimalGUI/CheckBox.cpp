@@ -1,6 +1,6 @@
 #include "CheckBox.h"
 
-CheckBox::CheckBox(sf::Shape* _shape)
+CheckBox::CheckBox(sf::Shape* _shape, sf::Text* _text)
 {
     this->m_shape = _shape;
     m_isActive = false;
@@ -8,11 +8,17 @@ CheckBox::CheckBox(sf::Shape* _shape)
     m_isPressed = false;
     m_shape->setOutlineColor(sf::Color(100, 100, 100));
     m_shape->setOutlineThickness(5.f);
+
+    m_text = _text;
 }
 
 CheckBox::~CheckBox()
 {
     delete this->m_shape;
+    if (m_text)
+    {
+        delete m_text;
+    }
 }
 
 void CheckBox::Update()
@@ -27,6 +33,11 @@ void CheckBox::Update()
 void CheckBox::Draw(sf::RenderTarget& _render)
 {
     _render.draw(*m_shape);
+    
+    if (m_text != nullptr)
+    {
+        _render.draw(*m_text);
+    }
 }
 
 void CheckBox::MoosePos(const sf::Vector2i& const _pos)

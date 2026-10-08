@@ -21,4 +21,5 @@ class GameData;
 
 bool CollisionRectPoint(sf::FloatRect& _rect, sf::Vector2f& _vec);
 int Random(int _min, int _max);
+void CenterTextOnShape(sf::Text& _text, const sf::Shape& _shape);
 #endif

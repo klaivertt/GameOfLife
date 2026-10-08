@@ -20,9 +20,16 @@ int Load(GameData& _data)
 	float x = SCREEN_S.x - 80.f;
 
 	sf::CircleShape* shape = new sf::CircleShape(20.f);
-	shape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
+	sf::Vector2f shapePos = sf::Vector2f(x, 40.f + 60.f * _data.widget.size());
+	shape->setPosition(shapePos);
 
-	Button* buttonInit = new Button(shape);
+	sf::Text* text = new sf::Text();
+	text->setFont(font);
+	text->setCharacterSize(16);
+	text->setString("Init");
+	CenterTextOnShape(*text, *shape);
+
+	Button* buttonInit = new Button(shape, text);
 
 	buttonInit->SetOnClick([&game]() { game.Init(); });
 
@@ -31,7 +38,13 @@ int Load(GameData& _data)
 
 	sf::RectangleShape* rshape = new sf::RectangleShape(sf::Vector2f(40.f, 40.f));
 	rshape->setPosition(sf::Vector2f(x, 40.f + 60.f * _data.widget.size()));
-	CheckBox* checkBox = new CheckBox(rshape);
+	
+	text = new sf::Text();
+	text->setFont(font);
+	text->setCharacterSize(16);
+	text->setString("Pause");
+	CenterTextOnShape(*text, *rshape);
+	CheckBox* checkBox = new CheckBox(rshape, text);
 
 	checkBox->SetOnToggle([&game](bool _on) { game.SetPause(_on); });
 

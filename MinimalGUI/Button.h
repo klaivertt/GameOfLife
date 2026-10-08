@@ -8,7 +8,8 @@ class Button : public Widget
 private:
 	using Callback = std::function<void()>;
 public:
-	Button(sf::Shape* _shape);
+
+	Button(sf::Shape* _shape, sf::Text* _text = nullptr);
 	~Button();
 	void Update() override;
 	void Draw(sf::RenderTarget& _render) override;
@@ -21,5 +22,6 @@ public:
 protected:
 	sf::Shape* m_shape;
 	Callback m_onClick;
+	sf::Text* m_text;
 	void CheckCollision(const sf::Vector2i& _pos) override;
 };

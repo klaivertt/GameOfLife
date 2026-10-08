@@ -54,7 +54,7 @@ void GameLife::SetPause(bool _b)
 
 void GameLife::Update(float _dt)
 {
-	std::cout << "pause : " << pause << std::endl;
+	//std::cout << "pause : " << pause << std::endl;
 	if (pause)
 	{
 		return;

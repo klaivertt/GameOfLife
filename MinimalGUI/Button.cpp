@@ -1,15 +1,21 @@
 #include "Button.h"
 
-Button::Button(sf::Shape* _shape)
+Button::Button(sf::Shape* _shape, sf::Text* _text)
 {
 	this->m_shape = _shape;
 	m_isActive = false;
 	m_isOver = false;
+	m_text = _text;
 }
 
 Button::~Button()
 {
-	delete this->m_shape;
+	delete this->m_shape; 
+	
+	if (m_text)
+	{
+		delete m_text;
+	}
 }
 
 void Button::Update()
@@ -22,6 +28,11 @@ void Button::Update()
 void Button::Draw(sf::RenderTarget& _render)
 {
 	_render.draw(*m_shape);
+
+	if(m_text != nullptr)
+	{
+		_render.draw(*m_text);
+	}
 }
 
 void Button::MoosePos(const sf::Vector2i& const _pos)

@@ -8,7 +8,7 @@ class CheckBox : public Widget
 private:
 	using Callback = std::function<void(bool)>;
 public:
-	CheckBox(sf::Shape* _shape);
+	CheckBox(sf::Shape* _shape, sf::Text* _text = nullptr);
 	~CheckBox();
 	void Update() override;
 	void Draw(sf::RenderTarget& _render) override;
@@ -23,6 +23,6 @@ protected :
 	sf::Shape* m_shape;
 	Callback m_onToggle;
 	bool m_isPressed;
-
+	sf::Text* m_text;
 	virtual void CheckCollision(const sf::Vector2i& _pos) override;
 };
