@@ -139,6 +139,7 @@
     <ClCompile Include="common.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="LifeGame.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Widget.h" />
     <ClCompile Include="Load.cpp" />
     <ClCompile Include="main.cpp" />

@@ -18,6 +18,8 @@ public:
 	void Released() override;
 private:
 	sf::Vector2f m_bound;
+	float current;
+
 	sf::Shape* m_shape;
 	sf::Shape* m_shapeOutline;
 	sf::Text* m_text;
