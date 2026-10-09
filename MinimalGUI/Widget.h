@@ -9,11 +9,10 @@ class Widget
 public:
 	virtual ~Widget() = default;
 
-	virtual void Update() = 0;
+	virtual void Update(const sf::Vector2i& _pos) = 0;
 	virtual void Draw(sf::RenderTarget& _render) = 0;
 
-	virtual void MoosePos(const sf::Vector2i& _pos) = 0;
-	virtual void Pressed() = 0;
+	virtual void Pressed(const sf::Vector2i& _pos) = 0;
 	virtual void Released() = 0;
 	
 protected:

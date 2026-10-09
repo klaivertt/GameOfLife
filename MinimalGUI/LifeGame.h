@@ -12,16 +12,18 @@ public:
 	void Init();
 	void SetPause(bool _b);
 
+	void SetLifePercent(float _f);
 
 	void Update(float _dt);
 	void Draw(sf::RenderTarget& _render);
 private:
 
 	sf::Vector2i gridSize;
-	std::vector<std::vector<sf::RectangleShape>> grid;
 	sf::RectangleShape gridRect;
+	sf::RectangleShape rect;
 	sf::Vector2f cellSize;
 	float updateTime;
+	float lifePercent;
 	float time;
 	bool pause;
 	std::vector<std::vector<bool>> cellAlive;

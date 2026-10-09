@@ -10,11 +10,10 @@ private:
 public:
 	CheckBox(sf::Shape* _shape, sf::Text* _text = nullptr);
 	~CheckBox();
-	void Update() override;
+	void Update(const sf::Vector2i& _pos) override;
 	void Draw(sf::RenderTarget& _render) override;
 
-	void MoosePos(const sf::Vector2i& _pos) override;
-	void Pressed() override;
+	void Pressed(const sf::Vector2i& _pos) override;
 	void Released() override;
 
 	void SetOnToggle(Callback _cb);

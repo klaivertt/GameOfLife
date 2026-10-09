@@ -5,6 +5,7 @@ GameLife::GameLife(sf::Vector2i _gridSize, float _updateTime)
 	gridSize = _gridSize;
 	time = 0;
 	updateTime = _updateTime;
+	lifePercent = 0.5f;
 	Init();
 }
 
@@ -24,9 +25,9 @@ void GameLife::Init()
 	gridRect.setOutlineColor(sf::Color(140, 140, 140));
 	gridRect.setOutlineThickness(1.f);
 
-
-	grid = std::vector<std::vector<sf::RectangleShape>>(gridSize.y,
-		std::vector<sf::RectangleShape>(gridSize.x));
+	rect.setSize(sf::Vector2f(cellSize.x, cellSize.y));
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineColor(sf::Color(140, 140, 140));
 
 	cellAlive = std::vector<std::vector<bool>>(gridSize.y,
 		std::vector<bool>(gridSize.x));
@@ -35,14 +36,7 @@ void GameLife::Init()
 	{
 		for (int x = 0; x < gridSize.x; ++x)
 		{
-			grid[y][x].setSize(cellSize);
-			grid[y][x].setPosition(
-				cellSize.x * x + MARGIN.x,
-				cellSize.y * y + MARGIN.y
-			);
-			cellAlive[y][x] = Random(0, 100) >= 55 ? true : false;
-
-			grid[y][x].setFillColor(cellAlive[y][x] ? sf::Color::White : sf::Color::Transparent);
+			cellAlive[y][x] = Random(0, 100) < static_cast<int>(100.f * lifePercent) ? true : false;
 		}
 	}
 }
@@ -52,6 +46,12 @@ void GameLife::SetPause(bool _b)
 	pause = _b;
 }
 
+void GameLife::SetLifePercent(float _f)
+{
+	lifePercent = std::clamp(_f, 0.f, 1.f);
+	//std::cout << "Life percent : " << lifePercent << std::endl;
+}
+
 void GameLife::Update(float _dt)
 {
 	//std::cout << "pause : " << pause << std::endl;
@@ -59,7 +59,7 @@ void GameLife::Update(float _dt)
 	{
 		return;
 	}
-	
+
 	time += _dt;
 	if (updateTime < time)
 	{
@@ -108,8 +108,6 @@ void GameLife::Update(float _dt)
 				{
 					cellAlive[i][j] = (countCellAlive == 3);
 				}
-
-				grid[i][j].setFillColor(cellAlive[i][j] ? sf::Color::White : sf::Color::Transparent);
 			}
 		}
 	}
@@ -121,7 +119,9 @@ void GameLife::Draw(sf::RenderTarget& _render)
 	{
 		for (int x = 0; x < gridSize.x; x++)
 		{
-			_render.draw(grid[y][x]);
+			rect.setFillColor(cellAlive[y][x] ? sf::Color::White : sf::Color::Transparent);
+			rect.setPosition(sf::Vector2f(cellSize.x * x + MARGIN.x, cellSize.y * y + MARGIN.y));
+			_render.draw(rect);
 
 			gridRect.setPosition(sf::Vector2f(cellSize.x * x + MARGIN.x, cellSize.y * y + MARGIN.y));
 			_render.draw(gridRect);

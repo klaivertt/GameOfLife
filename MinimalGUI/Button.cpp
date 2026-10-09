@@ -18,7 +18,7 @@ Button::~Button()
 	}
 }
 
-void Button::Update()
+void Button::Update(const sf::Vector2i& _pos)
 {
 	sf::Color fillC = m_isActive ? COLOR_G : COLOR_R;
 
@@ -35,14 +35,9 @@ void Button::Draw(sf::RenderTarget& _render)
 	}
 }
 
-void Button::MoosePos(const sf::Vector2i& const _pos)
+void Button::Pressed(const sf::Vector2i& _pos)
 {
-	//std::cout << "get mouse" << std::endl;
 	CheckCollision(_pos);
-}
-
-void Button::Pressed()
-{
 	if (m_isOver)
 	{
 		m_isActive = true;

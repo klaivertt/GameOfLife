@@ -9,9 +9,9 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(SCREEN_S.x, SCREEN_S.y), "MinimalGUI");
 
-	GameData* data = new GameData();
+	GameData data = GameData();
 
-	if (Load(*data) == -1)
+	if (Load(data) == -1)
 	{
 		return -1;
 	}
@@ -40,43 +40,41 @@ int main()
 				// Todo handle mouse pressed
 				if (event.mouseButton.button == sf::Mouse::Button::Left)
 				{
-					for (size_t i = 0; i < data->widget.size(); i++)
+					for (size_t i = 0; i < data.widget.size(); i++)
 					{
-						data->widget[i]->Pressed();
+						data.widget[i]->Pressed(data.mousePos);
 					}
 				}
 			}
 			break;
 			case sf::Event::MouseButtonReleased:
 			{
-				for (size_t i = 0; i < data->widget.size(); i++)
+				for (size_t i = 0; i < data.widget.size(); i++)
 				{
-					data->widget[i]->Released();
+					data.widget[i]->Released();
 				}
 			}
 			break;
 			}
 		}
-		data->mousePos = sf::Mouse::getPosition(window);
+		data.mousePos = sf::Mouse::getPosition(window);
 		float deltaTime = clock.restart().asSeconds();
-		Update(deltaTime, *data);
+		Update(deltaTime, data);
 
 		window.clear(sf::Color::Black);
 
-		Draw(window, *data);
+		Draw(window, data);
 
 		window.display();
 	}
 
-	for (size_t i = 0; i < data->widget.size(); i++)
+	for (size_t i = 0; i < data.widget.size(); i++)
 	{
-		Widget* widget = data->widget[i];
+		Widget* widget = data.widget[i];
 		delete widget;
 	}
 
-	data->widget.clear();
-
-	delete data;
+	data.widget.clear();
 
 	return 0;
 }

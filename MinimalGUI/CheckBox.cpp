@@ -21,7 +21,7 @@ CheckBox::~CheckBox()
     }
 }
 
-void CheckBox::Update()
+void CheckBox::Update(const sf::Vector2i& _pos)
 {
     sf::Color fillC = m_isActive ? COLOR_G : COLOR_R;
 
@@ -40,20 +40,15 @@ void CheckBox::Draw(sf::RenderTarget& _render)
     }
 }
 
-void CheckBox::MoosePos(const sf::Vector2i& const _pos)
-{
-    //std::cout << "get mouse" << std::endl;
-    CheckCollision(_pos);
-}
-
 
 void CheckBox::SetOnToggle(Callback _cb)
 {
     m_onToggle = std::move(_cb);
 }
 
-void CheckBox::Pressed()
+void CheckBox::Pressed(const sf::Vector2i& _pos)
 {
+    CheckCollision(_pos);
     if (m_isOver)
     {
       m_isPressed = true;

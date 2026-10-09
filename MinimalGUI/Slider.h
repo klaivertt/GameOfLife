@@ -2,26 +2,26 @@
 
 #include "Widget.h"
 
-class Slider : Widget
+class Slider : public Widget
 {
 private:
 	using Callback = std::function<void(float)>;
 public:
-	Slider(sf::Vector2f _bound = sf::Vector2f(0.f, 100.f), float _current, sf::Shape* _shape, sf::Text* _text = nullptr);
+	Slider(sf::Vector2f _bound = sf::Vector2f(0.f, 100.f), float _current = 0.f, sf::RectangleShape* _shape = nullptr, sf::Text* _text = nullptr);
 	~Slider();
 
-	void Update() override;
+	void Update(const sf::Vector2i& _pos) override;
 	void Draw(sf::RenderTarget& _render) override;
 
-	void MoosePos(const sf::Vector2i& _pos) override;
-	void Pressed() override;
+	void Pressed(const sf::Vector2i& _pos) override;
+	void SetOnReleased(Callback _cb);
 	void Released() override;
 private:
 	sf::Vector2f m_bound;
-	float current;
+	float m_current;
+	Callback m_onReleased;
 
-	sf::Shape* m_shape;
-	sf::Shape* m_shapeOutline;
+	sf::RectangleShape* m_shape;
 	sf::Text* m_text;
 	void CheckCollision(const sf::Vector2i& _pos) override;
 };
